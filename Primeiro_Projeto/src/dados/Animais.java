@@ -35,7 +35,7 @@ public class Animais {
         String animalString = "";
         animalString += "Nome: "+this.nome+"\nEspécie: "+this.especie+"\nDescrição: "+this.descricao;
         if(this.dono != null)
-            animalString += "Dono: "+this.dono.toString();
+            animalString += "\nDono: "+this.dono.toString();
         return animalString;
 
     }
