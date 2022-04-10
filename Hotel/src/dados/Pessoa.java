@@ -5,11 +5,21 @@ import java.util.Objects;
 public class Pessoa {
     private String nome;
     private boolean menorDeIdade;
-    private Endereco endereco;
+    private Endereco endereco = new Endereco();
 
     public Pessoa() {
+
     }
 
+    public Pessoa(String nome) {
+        this.nome = nome;
+    }
+
+    public Pessoa(String nome, boolean menorDeIdade, Endereco endereco) {
+        this.nome = nome;
+        this.menorDeIdade = menorDeIdade;
+        this.endereco = endereco;
+    }
 
     public String getNome() {
         return this.nome;
@@ -38,21 +48,20 @@ public class Pessoa {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    public String toString(){
+
+    public String toString() {
         String pessoaString = "";
-        pessoaString += "\n Nome: "+this.nome;
-        if(this.menorDeIdade == true){
+        pessoaString += "\n Nome: " + this.nome;
+        if (this.menorDeIdade == true) {
             pessoaString += "\n Menor de idade: Sim";
-        }
-        else{
+        } else {
             pessoaString += "\n Menor de idade: Não";
         }
-        if(this.endereco != null)
-            pessoaString += "\n Endereço: "+this.endereco.toString();
+        if (this.endereco != null)
+            pessoaString += "\n Endereço: " + this.endereco.toString();
         return pessoaString;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -60,12 +69,7 @@ public class Pessoa {
             return false;
         }
         Pessoa pessoa = (Pessoa) o;
-        return Objects.equals(nome, pessoa.nome) && menorDeIdade == pessoa.menorDeIdade && Objects.equals(endereco, pessoa.endereco);
+        return Objects.equals(nome, pessoa.nome) && menorDeIdade == pessoa.menorDeIdade
+                && Objects.equals(endereco, pessoa.endereco);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, menorDeIdade, endereco);
-    }
-
 }

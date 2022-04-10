@@ -7,7 +7,25 @@ public class Cliente {
     private Pessoa[] acompanhantes = new Pessoa[10];
     private int quantidadeAcompanhantes = 0;
     private Quarto quarto;
+    private AnimalDeEstimacao animal;
+    
+
     public Cliente() {
+    }
+
+    public Cliente(Pessoa pessoaQueReservou, Pessoa[] acompanhantes, int quantidadeAcompanhantes, Quarto quarto, AnimalDeEstimacao animal) {
+        this.animal = animal;
+        this.pessoaQueReservou = pessoaQueReservou;
+        this.acompanhantes = acompanhantes;
+        this.quantidadeAcompanhantes = quantidadeAcompanhantes;
+        this.quarto = quarto;
+    }
+
+    public void setAnimal(AnimalDeEstimacao animal){
+        this.animal = animal;
+    }
+    public AnimalDeEstimacao getAnimal(){
+        return this.animal;
     }
     public void setQuarto(Quarto quarto){
         this.quarto = quarto;
@@ -54,11 +72,13 @@ public class Cliente {
                 clienteString += this.acompanhantes[i].toString();
             }
         }
+        if(this.animal != null){
+            clienteString += "\n Anmal de estimacao:\n"+this.animal;
+        }
         return clienteString;
     
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -66,13 +86,9 @@ public class Cliente {
             return false;
         }
         Cliente cliente = (Cliente) o;
-        return Objects.equals(acompanhantes, cliente.acompanhantes) && quantidadeAcompanhantes == cliente.quantidadeAcompanhantes && Objects.equals(pessoaQueReservou, cliente.pessoaQueReservou);
+        return Objects.equals(acompanhantes, cliente.acompanhantes) && quantidadeAcompanhantes == cliente.quantidadeAcompanhantes && Objects.equals(pessoaQueReservou, cliente.pessoaQueReservou) && Objects.equals(animal, cliente.animal);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(acompanhantes, quantidadeAcompanhantes, pessoaQueReservou);
-    }
 
 
 

@@ -1,9 +1,21 @@
 package dados;
 
+import java.util.Objects;
+
 public class Quarto {
     private boolean ocupado;
     private int numero;
     private boolean suite;
+
+    public Quarto(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
+
+    public Quarto(boolean ocupado, int numero, boolean suite) {
+        this.ocupado = ocupado;
+        this.numero = numero;
+        this.suite = suite;
+    }
 
     public boolean isOcupado() {
         return this.ocupado;
@@ -39,23 +51,28 @@ public class Quarto {
 
     public String toString() {
         String quartoString = "";
-        quartoString += " Número do quarto: "+this.numero;
-        if(this.suite == true)
-        {
+        quartoString += " Número do quarto: " + this.numero;
+        if (this.suite == true) {
             quartoString += "\n Suite: Sim";
-        }
-        else{
+        } else {
             quartoString += "\n Suite: Não";
         }
-        if(this.ocupado == true)
-        {
+        if (this.ocupado == true) {
             quartoString += "\n Ocupado: Sim";
-        }
-        else{
+        } else {
             quartoString += "\n Ocupado: Não";
         }
         return quartoString;
     }
 
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Quarto)) {
+            return false;
+        }
+        Quarto quarto = (Quarto) o;
+        return ocupado == quarto.ocupado && numero == quarto.numero && suite == quarto.suite;
+    }
 
 }
