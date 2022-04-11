@@ -14,6 +14,6 @@ public class App {
         imobiliaria.setNome("Nome");
         
         System.out.println(imobiliaria.toString());
-        System.out.println(imobiliaria.filtroToString(100));
+        System.out.println(imobiliaria.filtroToString(5));
     }
 }

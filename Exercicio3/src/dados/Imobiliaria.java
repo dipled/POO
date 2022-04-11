@@ -5,6 +5,7 @@ public class Imobiliaria {
     private String nome;
     private Imovel[] imoveis = new Imovel[50];
     private int quantidadeDeImoveis = 0;
+    private int contador = 0;
 
     public Imobiliaria() {
 
@@ -41,8 +42,9 @@ public class Imobiliaria {
         Imovel aux = new Imovel();
         for (int i = 0; i < this.quantidadeDeImoveis; i += 1) {
             for (int i2 = i; i2 < this.quantidadeDeImoveis; i2 += 1) {
-                if (this.imoveis[i2].areaTotal() >= x) {
+                if (this.imoveis[i2].areaTotal() >= x && !this.imoveis[i2].equals(aux)) {
                     imoveisOrdenados[i] = this.imoveis[i2];
+                    aux = this.imoveis[i2];
                     break;
                 }
             }
