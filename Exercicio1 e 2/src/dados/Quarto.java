@@ -1,7 +1,5 @@
 package dados;
 
-import java.util.Objects;
-
 public class Quarto {
     private boolean ocupado;
     private int numero;
