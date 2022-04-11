@@ -25,7 +25,6 @@ public class Imobiliaria {
     public int getQuantidadeDeImoveis() {
         return this.quantidadeDeImoveis;
     }
-
     public void setImoveis(Imovel imovel) {
         if (this.quantidadeDeImoveis < 50) {
             this.imoveis[this.quantidadeDeImoveis] = imovel;
