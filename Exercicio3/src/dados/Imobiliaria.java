@@ -5,7 +5,6 @@ public class Imobiliaria {
     private String nome;
     private Imovel[] imoveis = new Imovel[50];
     private int quantidadeDeImoveis = 0;
-    private int contador = 0;
 
     public Imobiliaria() {
 

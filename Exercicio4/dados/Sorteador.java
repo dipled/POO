@@ -1,4 +1,7 @@
+package dados;
 import java.util.Random;
+
+
 
 public class Sorteador {
 
