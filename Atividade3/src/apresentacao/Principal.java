@@ -79,8 +79,12 @@ public class Principal {
     }
 
     public static void fazerReserva() {
-        if((reservaPassagem.getQuantidadeDeClientes() == 0) || (reservaPassagem.getQuantidadeDeCidades() == 0)){
-            System.out.println("Algo deu errado");
+        if (reservaPassagem.getQuantidadeDeClientes() == 0) {
+            System.out.println("Sem clientes cadastrados");
+            return;
+        }
+        if(reservaPassagem.getQuantidadeDeCidades() <= 1){
+            System.out.println("Sem cidades suficientes cadastradas");
             return;
         }
 
@@ -91,6 +95,10 @@ public class Principal {
         }
         System.out.println("Digite o ID do cliente para qual será feita a reserva");
         int clienteID = Integer.parseInt(in.nextLine());
+        if (clienteID > reservaPassagem.getQuantidadeDeClientes() || clienteID < 0) {
+            System.out.println("Erro, cliente inválido");
+            return;
+        }
 
         Reserva reserva = new Reserva();
         Cidade[] cidades = reservaPassagem.mostrarCidades();
@@ -102,13 +110,17 @@ public class Principal {
         int origemID = Integer.parseInt(in.nextLine());
         System.out.println("Digite o ID da cidade de destino");
         int destinoID = Integer.parseInt(in.nextLine());
+        if (origemID == destinoID) {
+            System.out.println("Erro, origem e destino nao podem ser os mesmos");
+            return;
+        }
         reserva = cadastraReserva();
         reserva.setOrigem(cidades[origemID]);
         reserva.setDestino(cidades[destinoID]);
 
         Reserva volta = new Reserva();
         System.out.println("Digite 1 para reservar uma volta para este cliente");
-        int escolha = Integer.parseInt(in.nextLine()); 
+        int escolha = Integer.parseInt(in.nextLine());
         if (escolha == 1) {
             volta = cadastraReserva();
             volta.setOrigem(cidades[destinoID]);
@@ -155,7 +167,7 @@ public class Principal {
 
     public static void mostrarReservas() {
         if (reservaPassagem.getQuantidadeDeClientes() == 0) {
-            System.out.println("Algo deu errado");
+            System.out.println("Sem clientes cadastrados");
             return;
         }
         System.out.println("Digite o cpf do cliente para o qual deseja mostrar as reservas");
@@ -168,9 +180,11 @@ public class Principal {
         for (int i = 0; i < reservas.length; i += 1) {
             if (reservas[i] == null)
                 break;
+
             System.out.println(reservas[i].toString());
+            System.out.println("\n");
 
         }
-    }
 
+    }
 }
