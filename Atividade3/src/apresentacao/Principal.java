@@ -34,7 +34,7 @@ public class Principal {
                 case 0:
                     return;
                 default:
-                    System.out.println("Escolha invalida");
+                    System.out.println("Escolha inválida");
                     break;
 
             }
