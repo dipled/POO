@@ -35,7 +35,7 @@ public class Disciplina {
         return this.avaliacoes;
     }
 
-    public void adicionarAvaliacao(Avaliacao avaliacao){
+    public void cadastraAvalicao(Avaliacao avaliacao){
         if(this.quantidadeDeAvaliacoes < 10 && avaliacao != null){
             this.avaliacoes[this.quantidadeDeAvaliacoes] = new Avaliacao();
             this.avaliacoes[this.quantidadeDeAvaliacoes] = avaliacao;
@@ -62,5 +62,8 @@ public class Disciplina {
             this.quantidadeDeAvaliacoes -= 1;
     }
     
+    public void adicionaNota(int idAvaliacao, float nota){
+        avaliacoes[idAvaliacao].setNota(nota);
+    }
     
 }
