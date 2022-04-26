@@ -8,7 +8,9 @@ import dados.*;
 
 public class Principal {
     private static Scanner in = new Scanner(System.in);
+    private static Scanner s = new Scanner(System.in);
     private static ReservaPassagem reservaPassagem = new ReservaPassagem();
+    
 
     public static void main(String[] args) {
         while (true) {
