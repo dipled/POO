@@ -10,6 +10,10 @@ public class Aluno {
     private int idade;
     private List<Semestre> semestres = new LinkedList<Semestre>();
 
+    public Semestre getSemestreAt(int idSemestre) {
+        return this.semestres.get(idSemestre);
+    }
+
     public List<Semestre> getSemestres() {
         return this.semestres;
     }
@@ -60,18 +64,38 @@ public class Aluno {
     }
 
     public boolean login(Aluno aluno) {
-        if (aluno.cpf == this.cpf && aluno.senha == this.senha) {
+        if (aluno.cpf.equals(this.cpf) && aluno.senha.equals(this.senha)) {
             return true;
         } else {
             return false;
         }
     }
-
-    public void cadastraSemestre(Semestre semestre) {
+}
+   /* public void cadastraSemestre(Semestre semestre) {
         this.semestres.add(semestre);
     }
 
     public void removeSemestre(int idSemestre) {
         this.semestres.remove(idSemestre);
     }
-}
+
+    public void cadastraDisciplina(int idSemestre, Disciplina disciplina) {
+        this.semestres.get(idSemestre).cadastraDisciplina(disciplina);
+    }
+
+    public void removeDisciplina(int idSemestre, int idDisciplina) {
+        this.semestres.get(idSemestre).removeDisciplina(idDisciplina);
+    }
+
+    public void cadastraAvalicao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
+        this.semestres.get(idSemestre).cadastraAvalicao(idDisciplina, avaliacao);
+    }
+
+    public void removeAvaliacao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
+        this.semestres.get(idSemestre).removeAvaliacao(idDisciplina, avaliacao);
+    }
+
+    public void adicionaNota(int idSemestre, int idDisciplina, int idAvaliacao, float nota) {
+        this.semestres.get(idSemestre).adicionaNota(idDisciplina, idAvaliacao, nota);
+    }
+}*/

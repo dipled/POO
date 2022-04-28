@@ -5,8 +5,12 @@ import java.util.List;
 
 public class Disciplina {
     private String nome;
-    private float media;
+    private String professor;
     private List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
+
+    public Avaliacao getAvaliacaoAt(int idAvaliacao){
+        return this.avaliacoes.get(idAvaliacao);
+    }
 
     public String getNome() {
         return this.nome;
@@ -16,19 +20,22 @@ public class Disciplina {
         this.nome = nome;
     }
 
-    public float getMedia() {
-        return this.media;
+    public String getProfessor(){
+        return this.professor;
     }
+    public void setProfessor(String professor){
+        this.professor = professor;
 
-    public void setMedia(float media) {
-        this.media = media;
     }
-
+    
     public List<Avaliacao> getAvaliacoes() {
         return this.avaliacoes;
     }
-
-    public void cadastraAvalicao(Avaliacao avaliacao) {
+    public String toString() {
+        return this.nome;
+    }
+    
+  /*  public void cadastraAvalicao(Avaliacao avaliacao) {
         this.avaliacoes.add(avaliacao);
     }
 
@@ -38,6 +45,7 @@ public class Disciplina {
 
     public void adicionaNota(int idAvaliacao, float nota) {
         this.avaliacoes.get(idAvaliacao).setNota(nota);
-    }
+    }*/
+
 
 }
