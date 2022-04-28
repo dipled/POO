@@ -12,7 +12,7 @@ public class ListaTelefonica {
     public ListaTelefonica(){
         for(char i = 'A'; i<'Z'; i += 1){
             List <Contato> listaContatos = new LinkedList<Contato>();
-            contatos.put(i, listaContatos);
+            this.contatos.put(i, listaContatos);
         }
     }
     

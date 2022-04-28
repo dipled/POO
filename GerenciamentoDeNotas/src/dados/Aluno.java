@@ -1,23 +1,17 @@
 package dados;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Aluno {
     private String cpf;
     private String senha;
     private String nome;
     private int idade;
-    private Semestre[] semestres = new Semestre[20];
-    private int quantidadeDeSemestres = 0;
-    
-    
-    public Semestre[] getSemestres(){
-        return this.semestres;
-    }
+    private List<Semestre> semestres = new LinkedList<Semestre>();
 
-    public void setSemestres(Semestre semestre){
-        if(quantidadeDeSemestres < 20){
-            this.semestres[this.quantidadeDeSemestres] = semestre;
-            this.quantidadeDeSemestres += 1;
-        }
+    public List<Semestre> getSemestres() {
+        return this.semestres;
     }
 
     public String getSenha() {
@@ -48,8 +42,36 @@ public class Aluno {
         return this.idade;
     }
 
-    public void setIdade(int idade){
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
+    public boolean equals(Object o) {
+        if (o instanceof Aluno) {
+            Aluno a = (Aluno) o;
+            if (a.cpf == this.cpf && a.senha == this.senha && a.idade == this.idade && a.nome == this.nome) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean login(Aluno aluno) {
+        if (aluno.cpf == this.cpf && aluno.senha == this.senha) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void cadastraSemestre(Semestre semestre) {
+        this.semestres.add(semestre);
+    }
+
+    public void removeSemestre(int idSemestre) {
+        this.semestres.remove(idSemestre);
+    }
 }

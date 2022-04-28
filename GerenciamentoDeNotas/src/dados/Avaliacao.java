@@ -1,6 +1,5 @@
 package dados;
 
-
 public class Avaliacao {
     private String nome;
     private float peso;
@@ -47,11 +46,16 @@ public class Avaliacao {
         return str;
     }
 
-    public boolean equals(Avaliacao avaliacao){
-        if(this.nome == avaliacao.getNome())
-            return true;
-        else
+    public boolean equals(Object o) {
+        if (o instanceof Avaliacao) {
+            Avaliacao a = (Avaliacao) o;
+            if (a.nome == this.nome && a.data == this.data && a.nota == this.nota && a.peso == this.peso) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
+        }
     }
-
 }

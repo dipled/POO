@@ -1,9 +1,11 @@
 package dados;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Semestre {
     private String nome;
-    private Disciplina[] disciplinas = new Disciplina[10];
-    private int quantidadeDeDisciplinas = 0;
+    private List<Disciplina> disciplinas = new LinkedList<Disciplina>();
     
     public String getNome(){
         return this.nome;
@@ -12,21 +14,11 @@ public class Semestre {
         this.nome = nome;
     }
 
-    public Disciplina[] getDisciplinas(){
+    public List<Disciplina> getDisciplinas(){
         return this.disciplinas;
     }     
     public void setDisciplina(Disciplina disciplina){
-        if(quantidadeDeDisciplinas < 10){
-            this.disciplinas[this.quantidadeDeDisciplinas] = disciplina;
-
-            //EU SOU FODA HAHAHAAHAAHAHAHAHAHAHAHAHHAHAHAHH
-        }
+        this.disciplinas.add(disciplina);
     }
-    public int getQuantidadeDeDisciplinas(){
-        return this.quantidadeDeDisciplinas;
-    }
-
-    public void setQuantidadeDeDisciplinas(int quantidadeDeDisciplinas){
-        this.quantidadeDeDisciplinas = quantidadeDeDisciplinas;
-    }
+    
 }

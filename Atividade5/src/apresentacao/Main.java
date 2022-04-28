@@ -10,9 +10,41 @@ import java.util.Scanner;
 public class Main {
     private static Scanner in = new Scanner(System.in);
     private static ListaTelefonica listaTelefonica = new ListaTelefonica();
+    private static int quantidadeDeContatos = 0;
 
     public static void main(String[] args) {
+        int escolha;
+        while (true) {
+            menu();
+            escolha = Integer.parseInt(in.nextLine());
+            switch (escolha) {
+                case 1:
+                    adicionarContato();
+                    break;
+                case 2:
+                    removerContato();
+                    break;
+                case 3:
+                    exibirContatos();
+                    break;
+                case 4:
+                    System.out.println("Digite a letra do contato desejado");
+                    String input = in.nextLine();
+                    exibirContatos(input.charAt(0));
+                    break;
+                case 0:
+                    return;
+            }
+        }
 
+    }
+
+    public static void menu() {
+        System.out.println("Digite 1 para adicionar um novo contato");
+        System.out.println("Digite 2 para remover um contato");
+        System.out.println("Digite 3 para exibir os contatos");
+        System.out.println("Digite 4 para exibir os contatos de uma determindada letra");
+        System.out.println("Digite 0 para sair do programa");
     }
 
     public static Contato novoContato() {
@@ -21,44 +53,65 @@ public class Main {
         String nome = in.nextLine();
         contato.setNome(nome);
 
-        System.out.println("Digite ");
+        System.out.println("Digite o telefone do contato");
         int telefone = Integer.parseInt(in.nextLine());
         contato.setTelefone(telefone);
 
         return contato;
     }
 
-    public void adicionarContato(Contato contato) {
+    public static void adicionarContato() {
+        Contato contato = new Contato();
+        contato = novoContato();
         listaTelefonica.adicionarContato(contato);
+        quantidadeDeContatos += 1;
     }
 
-    public void removerContato() {
+    public static void removerContato() {
+        if(quantidadeDeContatos <= 0){
+            System.out.println("Lista de contatos vazia");
+            return;
+        }
         Contato contatoDesejado = new Contato();
         System.out.println("Digite a letra do contato que voce desja remover");
         String input = in.nextLine().toUpperCase();
         char letra = input.charAt(0);
         exibirContatos(letra);
-        System.out.println("Digite o nome do contato que voce deseja remover");
+        System.out.println("Digite o id do contato que voce deseja remover");
         int id = Integer.parseInt(in.nextLine());
         contatoDesejado = listaTelefonica.buscarContatos(letra).get(id);
         listaTelefonica.removeContato(contatoDesejado);
+        quantidadeDeContatos -= 1;
 
     }
 
-    public void exibirContatos() {
-        listaTelefonica.buscarContatos().forEach((letra, contatos) -> {
-            System.out.println(letra);
-            for (Contato c : contatos) {
-                System.out.println(c.toString());
+    public static void exibirContatos() {
+        if(quantidadeDeContatos <= 0){
+            System.out.println("Lista de contatos vazia");
+            return;
+        }
+        for (char i = 'A'; i < 'Z'; i += 1) {
+            System.out.println(i);
+            List<Contato> contatos = new LinkedList<Contato>();
+            contatos = listaTelefonica.buscarContatos(i);
+            if (contatos == null)
+                break;
+            for (int i2 = 0; i2 < contatos.size(); i2 += 1) {
+                System.out.println(contatos.get(i2).toString());
             }
-        });
+            System.out.println();
+        }
     }
 
-    public void exibirContatos(char letra) {
+    public static void exibirContatos(char letra) {
+        if(quantidadeDeContatos <= 0){
+            System.out.println("Lista de contatos vazia");
+            return;
+        }
         List<Contato> contatos = new LinkedList<Contato>();
         contatos = listaTelefonica.buscarContatos(letra);
         for (int i = 0; i < contatos.size(); i += 1) {
-            System.out.println("ID: " + i + contatos.get(i));
+            System.out.println("ID: " + i + " " + contatos.get(i));
         }
     }
 
