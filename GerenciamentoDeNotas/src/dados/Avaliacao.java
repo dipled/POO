@@ -42,7 +42,7 @@ public class Avaliacao {
         String str = "";
         str += "Nome: " + this.nome + "\nPeso: " + this.peso + "\nData: " + this.data;
         if (this.nota != -1)
-            str += "Nota: " + this.nota;
+            str += "\nNota: " + this.nota;
         return str;
     }
 

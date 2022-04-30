@@ -71,31 +71,3 @@ public class Aluno {
         }
     }
 }
-   /* public void cadastraSemestre(Semestre semestre) {
-        this.semestres.add(semestre);
-    }
-
-    public void removeSemestre(int idSemestre) {
-        this.semestres.remove(idSemestre);
-    }
-
-    public void cadastraDisciplina(int idSemestre, Disciplina disciplina) {
-        this.semestres.get(idSemestre).cadastraDisciplina(disciplina);
-    }
-
-    public void removeDisciplina(int idSemestre, int idDisciplina) {
-        this.semestres.get(idSemestre).removeDisciplina(idDisciplina);
-    }
-
-    public void cadastraAvalicao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
-        this.semestres.get(idSemestre).cadastraAvalicao(idDisciplina, avaliacao);
-    }
-
-    public void removeAvaliacao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
-        this.semestres.get(idSemestre).removeAvaliacao(idDisciplina, avaliacao);
-    }
-
-    public void adicionaNota(int idSemestre, int idDisciplina, int idAvaliacao, float nota) {
-        this.semestres.get(idSemestre).adicionaNota(idDisciplina, idAvaliacao, nota);
-    }
-}*/

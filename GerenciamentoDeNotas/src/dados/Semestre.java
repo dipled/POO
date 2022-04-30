@@ -24,21 +24,6 @@ public class Semestre {
 
     public List<Disciplina> getDisciplinas(){
         return this.disciplinas;
-    }     
-    /*public void cadastraDisciplina(Disciplina disciplina){
-        this.disciplinas.add(disciplina);
-    }
-    public void removeDisciplina(int idDisciplina){
-        this.disciplinas.remove(idDisciplina);
-    }
-    public void cadastraAvalicao(int idDisciplina, Avaliacao avaliacao) {
-        this.disciplinas.get(idDisciplina).cadastraAvalicao(avaliacao);
-    }
-    public void removeAvaliacao(int idDisciplina, Avaliacao avaliacao){
-        this.disciplinas.get(idDisciplina).removeAvaliacao(avaliacao);
-    }
-    public void adicionaNota(int idDisciplina, int idAvaliacao, float nota){
-        this.disciplinas.get(idDisciplina).adicionaNota(idAvaliacao, nota);
-    }*/
+    }    
     
 }

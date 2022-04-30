@@ -34,18 +34,7 @@ public class Disciplina {
     public String toString() {
         return this.nome;
     }
-    
-  /*  public void cadastraAvalicao(Avaliacao avaliacao) {
-        this.avaliacoes.add(avaliacao);
-    }
 
-    public void removeAvaliacao(Avaliacao avaliacao) {
-        this.avaliacoes.remove(avaliacao);
-    }
-
-    public void adicionaNota(int idAvaliacao, float nota) {
-        this.avaliacoes.get(idAvaliacao).setNota(nota);
-    }*/
 
 
 }

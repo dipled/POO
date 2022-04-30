@@ -84,12 +84,14 @@ public class Sistema {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
         avaliacoes = this.alunos.get(idAluno).getSemestreAt(idSemestre).getDisciplinaAt(idDisciplina).getAvaliacoes();
         float soma = 0;
+        float pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
             if (avaliacoes.get(i).getNota() != -1) {
                 soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
+                pesoTotal += avaliacoes.get(i).getPeso();
             }
         }
-        return soma / avaliacoes.size();
+        return soma / pesoTotal;
     }
 
     public boolean equals(Object o) {
