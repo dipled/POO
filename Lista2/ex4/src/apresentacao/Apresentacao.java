@@ -14,7 +14,7 @@ public class Apresentacao {
     public static void main(String[] args) {
         while (true) {
             System.out.println(
-                    "Digite -1 para sair do programa, 1 para continuar, 2 para dividir em equipes ou 3 para mostrar os alunos cadastrados");
+                    "Digite -1 para sair do programa, 1 para cadastrar um aluno, 2 para dividir em equipes ou 3 para mostrar os alunos cadastrados");
             int escolha = Integer.parseInt(in.nextLine());
             if (escolha == -1)
                 return;
@@ -38,6 +38,8 @@ public class Apresentacao {
     }
 
     public static void mostraAlunos() {
+        if(turma.getAlunos().size() == 0)
+            System.out.println("Nenhum aluno cadastrado");
         for (int i = 0; i < turma.getAlunos().size(); i += 1) {
             System.out.println("ID " + i + " " + turma.getAlunos().get(i));
         }

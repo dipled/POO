@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.Comparator;
 import java.util.LinkedList;
+
 public class Turma {
     private List<Aluno> alunos = new LinkedList<>();
-    private Comparator<Aluno> compararPorMedia = (Aluno a1, Aluno a2) -> Double.compare((-1)*a1.calcularMedia(),
-            (-1)*a2.calcularMedia());
+    private Comparator<Aluno> compararPorMedia = (Aluno a1, Aluno a2) -> Double.compare((-1) * a1.calcularMedia(),
+            (-1) * a2.calcularMedia());
 
     public void adicionarAluno(Aluno aluno) {
         this.alunos.add(aluno);
@@ -30,7 +31,6 @@ public class Turma {
         this.compararPorMedia = compararPorMedia;
     }
 
-
     private void ordenarAlunosPorMedia() {
         this.alunos.sort(compararPorMedia);
     }
@@ -45,16 +45,20 @@ public class Turma {
         int tamEquipe, comeco, fim;
         auxiliar.addAll(alunos);
         while (true) {
-            if (auxiliar.size() < 3) {
+            int total = auxiliar.size();
+            if (total < 3) {
                 return retorno;
             }
-            if (auxiliar.size() == 3) {
+            if (total == 3) {
                 tamEquipe = 3;
             }
-            if (auxiliar.size() == 4) {
+            else{
+                if(total%3==0){
+                    tamEquipe = 3;
+                }
+                else{
                 tamEquipe = 4;
-            } else {
-                tamEquipe = rand.ints(3, 4).findFirst().getAsInt();
+                }
             }
             Equipe<Aluno> equipe = new Equipe<>();
             if (tamEquipe == 3) {
@@ -89,7 +93,6 @@ public class Turma {
             equipe.getLista().sort(compararPorMedia);
             retorno.add(equipe);
             auxiliar.sort(compararPorMedia);
-            System.out.println("EqSize: "+equipe.getLista().size());
         }
 
     }
