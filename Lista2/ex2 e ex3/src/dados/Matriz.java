@@ -12,11 +12,11 @@ public class Matriz<T> {
     public Matriz(int m, int n) {
         this.m = m;
         this.n = n;
-        this.matriz = (T[][]) new Object[this.m][this.n];
+        this.matriz = (T[][]) new Object[m][n];
     }
 
     public boolean set(T objeto, int i, int j) {
-        if (i > this.m || j > this.n) {
+        if (i >= this.m || j >= this.n) {
             return false;
         } else {
             this.matriz[i][j] = objeto;
@@ -25,7 +25,7 @@ public class Matriz<T> {
     }
 
     public T get(int i, int j) {
-        if (i > this.m || j > this.n) {
+        if (i >= this.m || j >= this.n) {
             return null;
         } else {
             return this.matriz[i][j];

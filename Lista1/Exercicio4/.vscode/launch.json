@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch principal",
+            "request": "launch",
+            "mainClass": "principal.principal",
+            "projectName": "Exercicio4_af83fe1d"
+        },
+        {
+            "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": ""
@@ -23,6 +30,5 @@
             "mainClass": "principal.principal",
             "projectName": "Exercicio4_7a0f4f12"
         }
-        
     ]
 }
