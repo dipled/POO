@@ -29,4 +29,4 @@ class Filme:
         self.setNota(json['nota'])
 
     def __str__(self):
-        return "Titulo: {} ".format(self.__titulo) + "Ano: {} ".format(self.__ano)+ "Classificacao: {} ".format(self.__classificacao) +"Nota {}".format(self.__nota)
+        return "Titulo: {} | ".format(self.__titulo) + "Ano: {} | ".format(self.__ano)+ "Classificacao: {} | ".format(self.__classificacao) +"Nota {}".format(self.__nota)
