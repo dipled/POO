@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Apresentacao {
-    private static Matriz<Integer> matriz = new Matriz<>(5, 5);
     private static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        for (int i = 0; i < 5; i += 1) {
-            for (int j = 0; j < 5; j += 1) {
+        System.out.println("Qual a ordem da matriz quadrada que voce quer digitar?");
+        int ordem = Integer.parseInt(scan.nextLine());
+        Matriz<Integer> matriz = new Matriz<>(ordem, ordem);
+        System.out.println("Digite uma matriz quadrada. Caso deseje sair do programa, digite -1");
+        for (int i = 0; i < ordem; i += 1) {
+            for (int j = 0; j < ordem; j += 1) {
                 int valor = Integer.parseInt(scan.nextLine());
                 if (valor != -1) {
                     matriz.set(valor, i, j);
