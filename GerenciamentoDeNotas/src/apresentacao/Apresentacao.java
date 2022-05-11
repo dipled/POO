@@ -19,6 +19,9 @@ public class Apresentacao {
             if (login() == -1)
                 return;
         }
+        System.out.println("\t\t\t--------------Logado como: "+alunos.getAlunos().get(idAluno).getNome()+"--------------");
+        System.out.println();
+        System.out.println();
         while (true) {
             menu();
             escolha = (in.nextLine());
@@ -59,7 +62,9 @@ public class Apresentacao {
                 case "11":
                     calculaMediaDaDisciplina();
                     break;
-
+                case "-1":
+                    deletaConta();
+                    //Removi o break aqui para executar o case 0 sempre apos o case -1 
                 case "0":
                     idAluno = -1;
                     while (idAluno == -1)
@@ -72,19 +77,19 @@ public class Apresentacao {
     }
 
     public static void menu() {
-        System.out.print("Digite 1 para cadastrar um semestre\t");
-        System.out.println("Digite 2 para remover um semestre");
-        System.out.print("Digite 3 para mostrar os semestres\t");
-        System.out.println("Digite 4 para cadastrar uma disciplina");
-        System.out.print("Digite 5 para remover uma disciplina\t");
-        System.out.println("Digite 6 para mostrar as disciplinas de um dado semestre");
-        System.out.print("Digite 7 para cadastrar uma avaliacao\t");
+        System.out.print("Digite 1 para cadastrar um semestre\t\t\t");
+        System.out.println("Digite 7 para cadastrar uma avaliacao");
+        System.out.print("Digite 2 para remover um semestre\t\t\t");
         System.out.println("Digite 8 para remover uma avaliacao");
-        System.out.print("Digite 9 para mostrar as avaliacoes de uma dada disciplina\t");
+        System.out.print("Digite 3 para mostrar os semestres\t\t\t");
+        System.out.println("Digite 9 para mostrar as avaliacoes de uma disciplina");
+        System.out.print("Digite 4 para cadastrar uma disciplina\t\t\t");
         System.out.println("Digite 10 para adicionar uma nota a uma avaliacao");
-        System.out.print("Digite 11 para calcular a media de uma disciplina\t");
+        System.out.print("Digite 5 para remover uma disciplina\t\t\t");
+        System.out.println("Digite 11 para calcular a media de uma disciplina");
+        System.out.print("Digite 6 para mostrar as disciplinas de um semestre\t");
         System.out.println("Digite 12 para calcular a nota do Exame");
-        System.out.print("Digite 0 para deslogar\t");
+        System.out.print("Digite 0 para deslogar\t\t\t\t\t");
         System.out.println("Digite -1 para deletar sua conta");
     }
 
@@ -230,6 +235,9 @@ public class Apresentacao {
         int idDisciplina = selecionaDisciplina(idSemestre);
         float nota = alunos.calculaMediaDaDisciplina(idAluno, idSemestre, idDisciplina);
         System.out.println("Nota da disciplina: "+nota);
+    }
+    public static void deletaConta(){
+        alunos.removeAluno(idAluno);
     }
 
     public static int login() {
