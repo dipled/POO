@@ -7,7 +7,6 @@ public class Apresentacao {
     private static Losango losango2 = new Losango();
     private static Trapezio trapezio1 = new Trapezio();
     private static Trapezio trapezio2 = new Trapezio();
-
     public static void main(String[] args) {
         circulo1.setRaio(3);
         circulo2.setRaio(2);

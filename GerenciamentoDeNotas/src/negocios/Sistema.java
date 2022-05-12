@@ -64,7 +64,7 @@ public class Sistema {
         this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes().remove(idAvaliacao);
     }
 
-    public void adicionaNota(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao, float nota) {
+    public void adicionaNota(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao, double nota) {
         this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes().get(idAvaliacao).setNota(nota);
     }
 
@@ -80,11 +80,11 @@ public class Sistema {
        return this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes();
     }
 
-    public float calculaMediaDaDisciplina(int idAluno, int idSemestre, int idDisciplina) {
+    public double calculaMediaDaDisciplina(int idAluno, int idSemestre, int idDisciplina) {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
         avaliacoes = this.alunos.get(idAluno).getSemestreAt(idSemestre).getDisciplinaAt(idDisciplina).getAvaliacoes();
-        float soma = 0;
-        float pesoTotal = 0;
+        double soma = 0;
+        double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
             if (avaliacoes.get(i).getNota() != -1) {
                 soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
@@ -93,6 +93,29 @@ public class Sistema {
         }
         return soma / pesoTotal;
     }
+
+    public double calculaMediaDoExame(int idAluno, int idSemestre, int idDisciplina){
+        List<Avaliacao> avaliacoes = new LinkedList<>();
+        avaliacoes = this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes();
+        double soma = 0;
+        double pesoTotal = 0;
+        for (int i = 0; i < avaliacoes.size(); i += 1) {
+            if (avaliacoes.get(i).getNota() != -1) {
+                soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
+                pesoTotal += avaliacoes.get(i).getPeso();
+            }
+        }
+        if(soma/pesoTotal<1.7){
+            return -2;
+        }   
+        if(soma/pesoTotal >= 7){
+            return -1;
+        }
+        return -1.5*soma/pesoTotal + 12.5;
+        
+    }
+
+
 
     public boolean equals(Object o) {
         if (o == this)

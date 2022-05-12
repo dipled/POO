@@ -62,6 +62,9 @@ public class Apresentacao {
                 case "11":
                     calculaMediaDaDisciplina();
                     break;
+                case "12":
+                    calculaMediaDoExame();
+                    break;
                 case "-1":
                     deletaConta();
                     //Removi o break aqui para executar o case 0 sempre apos o case -1 
@@ -159,7 +162,7 @@ public class Apresentacao {
         System.out.println("Digite o nome da avaliação");
         avaliacao.setNome(in.nextLine());
         System.out.println("Digite o peso da avaliação");
-        avaliacao.setPeso(Float.parseFloat(in.nextLine()));
+        avaliacao.setPeso(Double.parseDouble(in.nextLine()));
         System.out.println("Digite a data da avaliação");
         avaliacao.setData(in.nextLine());
         alunos.cadastraAvalicao(idAluno, idSemestre, idDisciplina, avaliacao);
@@ -226,16 +229,32 @@ public class Apresentacao {
         int idDisciplina = selecionaDisciplina(idSemestre);
         int idAvaliacao = selecionaAvaliacao(idSemestre, idDisciplina);
         System.out.println("Digite a nota da avaliação");
-        alunos.adicionaNota(idAluno, idSemestre, idDisciplina, idAvaliacao, Float.parseFloat(in.nextLine()));
+        alunos.adicionaNota(idAluno, idSemestre, idDisciplina, idAvaliacao, Double.parseDouble(in.nextLine()));
 
     }
 
     public static void calculaMediaDaDisciplina(){
         int idSemestre = selecionaSemestre();
         int idDisciplina = selecionaDisciplina(idSemestre);
-        float nota = alunos.calculaMediaDaDisciplina(idAluno, idSemestre, idDisciplina);
+        double nota = alunos.calculaMediaDaDisciplina(idAluno, idSemestre, idDisciplina);
         System.out.println("Nota da disciplina: "+nota);
     }
+    public static void calculaMediaDoExame(){
+        int idSemestre = selecionaSemestre();
+        int idDisciplina = selecionaDisciplina(idSemestre);
+        double nota = alunos.calculaMediaDoExame(idAluno, idSemestre, idDisciplina);
+        if(nota == -1){
+            System.out.println("Exame não é necessário");
+        }
+        else if(nota == -2){
+            System.out.println("Aluno já rodou");
+        }
+        else{
+            System.out.println(nota);
+        }
+    }
+
+
     public static void deletaConta(){
         alunos.removeAluno(idAluno);
     }

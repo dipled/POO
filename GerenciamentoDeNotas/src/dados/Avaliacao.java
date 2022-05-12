@@ -2,9 +2,9 @@ package dados;
 
 public class Avaliacao {
     private String nome;
-    private float peso;
+    private double peso;
     private String data;
-    private float nota = -1;
+    private double nota = -1;
 
     public String getNome() {
         return this.nome;
@@ -14,11 +14,11 @@ public class Avaliacao {
         this.nome = nome;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return this.peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
@@ -30,11 +30,11 @@ public class Avaliacao {
         this.data = data;
     }
 
-    public float getNota() {
+    public double getNota() {
         return this.nota;
     }
 
-    public void setNota(float nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
