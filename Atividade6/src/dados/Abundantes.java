@@ -1,5 +1,4 @@
 package dados;
-
 public class Abundantes extends Gerador {
 
     private boolean isAbundante(int x) {
