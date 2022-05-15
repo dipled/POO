@@ -17,10 +17,14 @@ public class Apresentacao {
         trapezio1.setAltura(10);
         trapezio1.setBaseMaior(30);
         trapezio1.setBaseMenor(20);
+        trapezio2.setAltura(20);
+        trapezio2.setBaseMaior(300);
+        trapezio2.setBaseMenor(500);
         System.out.println(circulo1.toString());
         System.out.println(circulo2.toString());
         System.out.println(losango1.toString());
         System.out.println(losango2.toString());
         System.out.println(trapezio1.toString());
+        System.out.println(trapezio2.toString());
     }
 }
