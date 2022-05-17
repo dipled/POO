@@ -14,6 +14,7 @@ public class Sistema {
     public Sistema(List<Aluno> alunos) {
         this.alunos = alunos;
     }
+    
 
     public List<Aluno> getAlunos() {
         return this.alunos;
@@ -57,15 +58,18 @@ public class Sistema {
     }
 
     public void cadastraAvalicao(int idAluno, int idSemestre, int idDisciplina, Avaliacao avaliacao) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes().add(avaliacao);
+        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+                .add(avaliacao);
     }
 
     public void removeAvaliacao(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes().remove(idAvaliacao);
+        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+                .remove(idAvaliacao);
     }
 
     public void adicionaNota(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao, double nota) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes().get(idAvaliacao).setNota(nota);
+        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+                .get(idAvaliacao).setNota(nota);
     }
 
     public List<Semestre> buscarSemestres(int idAluno) {
@@ -77,7 +81,8 @@ public class Sistema {
     }
 
     public List<Avaliacao> buscarAvaliacoes(int idAluno, int idSemestre, int idDisciplina) {
-       return this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes();
+        return this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
+                .getAvaliacoes();
     }
 
     public double calculaMediaDaDisciplina(int idAluno, int idSemestre, int idDisciplina) {
@@ -94,9 +99,10 @@ public class Sistema {
         return soma / pesoTotal;
     }
 
-    public double calculaMediaDoExame(int idAluno, int idSemestre, int idDisciplina){
+    public double calculaMediaDoExame(int idAluno, int idSemestre, int idDisciplina) {
         List<Avaliacao> avaliacoes = new LinkedList<>();
-        avaliacoes = this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes();
+        avaliacoes = this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
+                .getAvaliacoes();
         double soma = 0;
         double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
@@ -105,17 +111,15 @@ public class Sistema {
                 pesoTotal += avaliacoes.get(i).getPeso();
             }
         }
-        if(soma/pesoTotal<1.7){
+        if (soma / pesoTotal < 1.7) {
             return -2;
-        }   
-        if(soma/pesoTotal >= 7){
+        }
+        if (soma / pesoTotal >= 7) {
             return -1;
         }
-        return -1.5*soma/pesoTotal + 12.5;
-        
+        return -1.5 * soma / pesoTotal + 12.5;
+
     }
-
-
 
     public boolean equals(Object o) {
         if (o == this)
