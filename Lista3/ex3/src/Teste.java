@@ -11,11 +11,13 @@ public class Teste {
         digrafo.adicionarVertice();
         digrafo.adicionarAresta(0, 1);
         digrafo.adicionarAresta(2,1);
+        digrafo.adicionarAresta(0, 0);
         grafo.adicionarVertice();
         grafo.adicionarVertice();
         grafo.adicionarVertice();
         grafo.adicionarVertice();
         grafo.adicionarAresta(2, 1);
+        grafo.adicionarAresta(3, 1);
         
         System.out.println("Dígrafo: ");
         System.out.println(digrafo.toString());
