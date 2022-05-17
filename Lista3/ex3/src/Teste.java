@@ -18,12 +18,8 @@ public class Teste {
         grafo.adicionarAresta(2, 1);
         
         System.out.println("Dígrafo: ");
-        for(int i = 0; i < digrafo.getMatrizAdjacencia1().size(); i += 1){
-            System.out.println(digrafo.getMatrizAdjacencia1().get(i));
-        }
+        System.out.println(digrafo.toString());
         System.out.println("Grafo: ");
-        for(int i = 0; i < grafo.getMatrizAdjacencia1().size(); i += 1){
-            System.out.println(grafo.getMatrizAdjacencia1().get(i));
-        }
+        System.out.println(grafo.toString());
     }
 }

@@ -25,5 +25,17 @@ public class Digrafo{
     public void adicionarAresta(int origem, int destino){
         matrizAdjacencia1.get(origem).set(destino, 1);
     }
+    public String toString(){
+        String retorno = "   ";
+        for(int i = 0; i < matrizAdjacencia1.size(); i += 1){
+            retorno += i+"  ";
+        }
+        retorno += "\n";
+        for(int i = 0; i < matrizAdjacencia1.size(); i += 1){
+            retorno += i+ " ";
+            retorno += matrizAdjacencia1.get(i) + "\n";
+        }
+        return retorno;
+    }
 }
 
