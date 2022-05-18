@@ -8,12 +8,12 @@ import dados.Semestre;
 public class Teste {
     private static Sistema sistema = new Sistema();
     // A variável idAluno funciona como um identificador de qual usuário está logado
-    // no momento
+    // no momento (-1 representa que ninguem esta logado)
     private static int idAluno = -1;
 
     public static void main(String[] args) {
-        Aluno aluno = new Aluno();
         // Cadastro de um novo usuario:
+        Aluno aluno = new Aluno();
         aluno.setNome("Josias Dutra");
         aluno.setCfp("908.075.789-67");
         aluno.setIdade(20);
