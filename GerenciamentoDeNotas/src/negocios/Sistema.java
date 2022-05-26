@@ -136,7 +136,7 @@ public class Sistema {
         if (exame == -1) {
             return "Aluno Aprovado";
         }
-        return "Aluno em situação de exame. Média necessária: " + exame;
+        return "Exame; Média necessária: " + exame;
 
     }
 
@@ -170,6 +170,7 @@ public class Sistema {
                     doc.add(new Paragraph("-\tDisciplina: "
                             + semestres.get(i).getDisciplinas().get(i2).getNome()));
                     doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina(i, i2)));
+                    doc.add(new Paragraph("-\t\tSituação: "+this.situacaoDoExame(i, i2)));
                 }
 
             }

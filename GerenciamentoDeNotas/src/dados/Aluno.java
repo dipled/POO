@@ -58,7 +58,7 @@ public class Aluno {
             return false;
         }
     }
-
+    //Método verifica se o aluno recebido como parâmetro possui o mesmo cpf e senha que ele(Esta é a condição para fazer login).
     public boolean login(Aluno aluno) {
         if (aluno.getCpf().equals(this.cpf) && aluno.getSenha().equals(this.senha)) {
             return true;
