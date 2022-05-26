@@ -17,9 +17,16 @@ public class Abundantes extends Gerador {
     }
 
     public void gerar(int quantidade) {
-        for (int i = 0; i < quantidade; i += 1) {
+        int i = 0;
+        int cont = 0;
+        while(true) {
             if (isAbundante(i)) {
                 this.sequencia.add(i);
+                cont += 1;
+            }
+            i += 1;
+            if(cont == quantidade){
+                return;
             }
         }
     }

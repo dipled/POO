@@ -17,11 +17,18 @@ public class Perfeitos extends Gerador {
         }
     }
     public void gerar(int quantidade){
-        for(int i = 1; i < quantidade; i += 1){
+        int i = 1;
+        int cont = 0;
+        while(true){
             if(isPerfeito(i)){
                 this.sequencia.add(i);
+                cont += 1;
             }
+            i += 1;
+            if(cont == quantidade){
+                return;
+            }
+        }
         }
     }
     
-}

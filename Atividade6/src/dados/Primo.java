@@ -10,9 +10,16 @@ public class Primo extends Gerador {
         return true;
     }
     public void gerar(int quantidade){
-        for(int i = 0; i < quantidade; i += 1){
-            if(isPrimo(i)){
+        int i = 2;
+        int cont = 0;
+        while(true) {
+            if (isPrimo(i)) {
                 this.sequencia.add(i);
+                cont += 1;
+            }
+            i += 1;
+            if(cont == quantidade){
+                return;
             }
         }
     }

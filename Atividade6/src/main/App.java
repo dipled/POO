@@ -13,7 +13,7 @@ public class App {
         fatoriais.gerar(10);
         fibonacci.gerar(7);
         naturais.gerar(20);
-        perfeitos.gerar(1000);
+        perfeitos.gerar(4);
         primo.gerar(18);
         quadrados.gerar(20);
         System.out.println("Abundantes:");

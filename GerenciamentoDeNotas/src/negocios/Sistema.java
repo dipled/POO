@@ -4,9 +4,15 @@ import dados.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.LinkedList;
+import java.io.FileNotFoundException;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 public class Sistema {
     private List<Aluno> alunos = new LinkedList<Aluno>();
+    private int idAluno = -1;
 
     public Sistema() {
     }
@@ -14,19 +20,27 @@ public class Sistema {
     public Sistema(List<Aluno> alunos) {
         this.alunos = alunos;
     }
-    
 
     public List<Aluno> getAlunos() {
         return this.alunos;
     }
 
-    public int login(Aluno aluno) {
+    public int getIdAluno() {
+        return this.idAluno;
+    }
+
+    public void deslogar() {
+        this.idAluno = -1;
+    }
+
+    public String login(Aluno aluno) {
         for (int i = 0; i < this.alunos.size(); i += 1) {
-            if (this.alunos.get(i).login(aluno)) {
-                return i;
+            if (this.alunos.get(i).login(aluno) == true) {
+                this.idAluno = i;
+                return "Logado como: " + this.alunos.get(this.idAluno).getNome();
             }
         }
-        return -1;
+        return "Usuário Inválido";
     }
 
     public void cadastraAluno(Aluno aluno) {
@@ -35,59 +49,60 @@ public class Sistema {
 
     }
 
-    public void removeAluno(int idAluno) {
-        this.alunos.remove(idAluno);
+    public void removeAluno() {
+        this.alunos.remove(this.idAluno);
     }
 
-    public void cadastraSemestre(int idAluno, Semestre semestre) {
-        this.alunos.get(idAluno).getSemestres().add(semestre);
-
-    }
-
-    public void removeSemestre(int idAluno, int idSemestre) {
-        this.alunos.get(idAluno).getSemestres().remove(idSemestre);
+    public void cadastraSemestre(Semestre semestre) {
+        this.alunos.get(this.idAluno).getSemestres().add(semestre);
 
     }
 
-    public void cadastraDisciplina(int idAluno, int idSemestre, Disciplina disciplina) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().add(disciplina);
+    public void removeSemestre(int idSemestre) {
+        this.alunos.get(this.idAluno).getSemestres().remove(idSemestre);
+
     }
 
-    public void removeDisciplina(int idAluno, int idSemestre, int idDisciplina) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().remove(idDisciplina);
+    public void cadastraDisciplina(int idSemestre, Disciplina disciplina) {
+        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().add(disciplina);
     }
 
-    public void cadastraAvalicao(int idAluno, int idSemestre, int idDisciplina, Avaliacao avaliacao) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+    public void removeDisciplina(int idSemestre, int idDisciplina) {
+        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().remove(idDisciplina);
+    }
+
+    public void cadastraAvalicao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
+        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
                 .add(avaliacao);
     }
 
-    public void removeAvaliacao(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+    public void removeAvaliacao(int idSemestre, int idDisciplina, int idAvaliacao) {
+        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
                 .remove(idAvaliacao);
     }
 
-    public void adicionaNota(int idAluno, int idSemestre, int idDisciplina, int idAvaliacao, double nota) {
-        this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
+    public void adicionaNota(int idSemestre, int idDisciplina, int idAvaliacao, double nota) {
+        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
                 .get(idAvaliacao).setNota(nota);
     }
 
-    public List<Semestre> buscarSemestres(int idAluno) {
-        return this.alunos.get(idAluno).getSemestres();
+    public List<Semestre> buscarSemestres() {
+        return this.alunos.get(this.idAluno).getSemestres();
     }
 
-    public List<Disciplina> buscarDisciplinas(int idAluno, int idSemestre) {
-        return this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas();
+    public List<Disciplina> buscarDisciplinas(int idSemestre) {
+        return this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas();
     }
 
-    public List<Avaliacao> buscarAvaliacoes(int idAluno, int idSemestre, int idDisciplina) {
-        return this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
+    public List<Avaliacao> buscarAvaliacoes(int idSemestre, int idDisciplina) {
+        return this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
                 .getAvaliacoes();
     }
 
-    public double calculaMediaDaDisciplina(int idAluno, int idSemestre, int idDisciplina) {
+    public double calculaMediaDaDisciplina(int idSemestre, int idDisciplina) {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
-        avaliacoes = this.alunos.get(idAluno).getSemestreAt(idSemestre).getDisciplinaAt(idDisciplina).getAvaliacoes();
+        avaliacoes = this.alunos.get(this.idAluno).getSemestreAt(idSemestre).getDisciplinaAt(idDisciplina)
+                .getAvaliacoes();
         double soma = 0;
         double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
@@ -99,25 +114,28 @@ public class Sistema {
         return soma / pesoTotal;
     }
 
-    public double calculaMediaDoExame(int idAluno, int idSemestre, int idDisciplina) {
-        List<Avaliacao> avaliacoes = new LinkedList<>();
-        avaliacoes = this.alunos.get(idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
-                .getAvaliacoes();
-        double soma = 0;
-        double pesoTotal = 0;
-        for (int i = 0; i < avaliacoes.size(); i += 1) {
-            if (avaliacoes.get(i).getNota() != -1) {
-                soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
-                pesoTotal += avaliacoes.get(i).getPeso();
-            }
-        }
-        if (soma / pesoTotal < 1.7) {
-            return -2;
-        }
-        if (soma / pesoTotal >= 7) {
+    public double calculaMediaDoExame(int idSemestre, int idDisciplina) {
+        double mediaFinal = this.calculaMediaDaDisciplina(idSemestre, idDisciplina);
+        if (mediaFinal >= 7) {
             return -1;
         }
-        return -1.5 * soma / pesoTotal + 12.5;
+        if (mediaFinal < -1.7) {
+            return -2;
+        }
+        double exame = -1.5 * mediaFinal + 12.5;
+        return exame;
+
+    }
+
+    public String situacaoDoExame(int idSemestre, int idDisciplina) {
+        double exame = this.calculaMediaDoExame(idSemestre, idDisciplina);
+        if (exame == -2) {
+            return "Aluno Reprovado";
+        }
+        if (exame == -1) {
+            return "Aluno Aprovado";
+        }
+        return "Aluno em situação de exame. Média necessária: " + exame;
 
     }
 
@@ -130,4 +148,35 @@ public class Sistema {
         Sistema sistema = (Sistema) o;
         return Objects.equals(alunos, sistema.alunos);
     }
+
+    public void alunoPdf() {
+        Aluno aluno = new Aluno();
+        aluno = alunos.get(this.idAluno);
+        List<Semestre> semestres = new LinkedList<>();
+        semestres = aluno.getSemestres();
+        try {
+            String dest = "Notas" + aluno.getCpf() + ".pdf";
+            PdfWriter writer = new PdfWriter(dest);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document doc = new Document(pdf);
+
+            doc.add(new Paragraph("Nome do Aluno: " + aluno.getNome()));
+            doc.add(new Paragraph("-\tCPF: " + aluno.getCpf()));
+            doc.add(new Paragraph("-\tIdade: " + aluno.getIdade()));
+            for (int i = 0; i < semestres.size(); i += 1) {
+                doc.add(new Paragraph("Semestre: " + semestres.get(i).getNome()));
+                for (int i2 = 0; i2 < semestres.get(i).getDisciplinas().size(); i2 += 1) {
+                    doc.add(new Paragraph("-\tDisciplina: "
+                            + semestres.get(i).getDisciplinas().get(i2).getNome()));
+                    doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina(i, i2)));
+                }
+
+            }
+            doc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

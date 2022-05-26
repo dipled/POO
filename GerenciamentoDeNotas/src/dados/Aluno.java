@@ -64,7 +64,7 @@ public class Aluno {
     }
 
     public boolean login(Aluno aluno) {
-        if (aluno.cpf.equals(this.cpf) && aluno.senha.equals(this.senha)) {
+        if (aluno.getCpf().equals(this.cpf) && aluno.getSenha().equals(this.senha)) {
             return true;
         } else {
             return false;

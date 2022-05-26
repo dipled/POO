@@ -1,3 +1,3 @@
-from .Pessoa import Pessoa
-from .Aluno import Aluno
-from .Professor import Professor
+from dados.Pessoa import Pessoa
+from dados.Aluno import Aluno
+from dados.Professor import Professor

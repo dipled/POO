@@ -2,6 +2,20 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "/home/pedro/Downloads/slf4j-api-1.7.9.jar",
+        "/home/pedro/Downloads/slf4j-api-1.7.9-javadoc.jar",
+        "/home/pedro/Downloads/barcodes-7.1.14.jar",
+        "/home/pedro/Downloads/font-asian-7.1.14.jar",
+        "/home/pedro/Downloads/forms-7.1.14.jar",
+        "/home/pedro/Downloads/hyph-7.1.14.jar",
+        "/home/pedro/Downloads/io-7.1.14.jar",
+        "/home/pedro/Downloads/kernel-7.1.14.jar",
+        "/home/pedro/Downloads/layout-7.1.14.jar",
+        "/home/pedro/Downloads/pdfa-7.1.14.jar",
+        "/home/pedro/Downloads/pdftest-7.1.14.jar",
+        "/home/pedro/Downloads/sign-7.1.14.jar",
+        "/home/pedro/Downloads/styled-xml-parser-7.1.14.jar",
+        "/home/pedro/Downloads/svg-7.1.14.jar"
     ]
 }
