@@ -101,8 +101,9 @@ public class Sistema {
 
     public double calculaMediaDaDisciplina(int idSemestre, int idDisciplina) {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
-        avaliacoes = this.alunos.get(this.idAluno).getSemestreAt(idSemestre).getDisciplinaAt(idDisciplina)
+        avaliacoes = this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
                 .getAvaliacoes();
+
         double soma = 0;
         double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {

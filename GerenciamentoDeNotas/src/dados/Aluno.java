@@ -10,10 +10,6 @@ public class Aluno {
     private int idade;
     private List<Semestre> semestres = new LinkedList<Semestre>();
 
-    public Semestre getSemestreAt(int idSemestre) {
-        return this.semestres.get(idSemestre);
-    }
-
     public List<Semestre> getSemestres() {
         return this.semestres;
     }

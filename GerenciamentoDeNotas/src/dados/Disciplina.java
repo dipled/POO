@@ -8,10 +8,6 @@ public class Disciplina {
     private String professor;
     private List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
 
-    public Avaliacao getAvaliacaoAt(int idAvaliacao){
-        return this.avaliacoes.get(idAvaliacao);
-    }
-
     public String getNome() {
         return this.nome;
     }
@@ -20,21 +16,21 @@ public class Disciplina {
         this.nome = nome;
     }
 
-    public String getProfessor(){
+    public String getProfessor() {
         return this.professor;
     }
-    public void setProfessor(String professor){
+
+    public void setProfessor(String professor) {
         this.professor = professor;
 
     }
-    
+
     public List<Avaliacao> getAvaliacoes() {
         return this.avaliacoes;
     }
+
     public String toString() {
         return this.nome;
     }
-
-
 
 }
