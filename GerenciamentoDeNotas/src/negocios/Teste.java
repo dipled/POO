@@ -115,7 +115,7 @@ public class Teste {
 
         // Atribuindo notas às avaliações
         sistema.adicionaNota(0, 0, 0, 0.5);
-        sistema.adicionaNota(0, 0, 1, 3);
+        sistema.adicionaNota(0, 0, 1, 1);
         sistema.adicionaNota(0, 1, 0, 7);
         // Calculando a media e decidindo se o aluno está ou não de exame
         System.out.println("Média na disciplina " + sistema.buscarDisciplinas(0).get(0) + ": "

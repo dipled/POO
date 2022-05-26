@@ -120,7 +120,7 @@ public class Sistema {
         if (mediaFinal >= 7) {
             return -1;
         }
-        if (mediaFinal < -1.7) {
+        if (mediaFinal < 1.7) {
             return -2;
         }
         double exame = -1.5 * mediaFinal + 12.5;
