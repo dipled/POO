@@ -86,30 +86,46 @@ public class Teste {
         semestre2.setNome("2022/1");
         sistema.cadastraSemestre(semestre2);
 
-        // Cadastrando disciplina
+        // Cadastrando disciplinas
         Disciplina disciplina2 = new Disciplina();
         disciplina2.setNome("Metodologia de pesquisa");
         disciplina2.setProfessor("Carla");
         sistema.cadastraDisciplina(0, disciplina2);
+        Disciplina disciplina3 = new Disciplina();
+        disciplina3.setNome("Equações diferenciais");
+        disciplina3.setProfessor("Vladmin");
+        sistema.cadastraDisciplina(0, disciplina3);
 
         // Cadastrando avaliacoes
-        avaliacao1.setNome("A1");
-        avaliacao1.setData("22/02/22");
-        avaliacao1.setPeso(2);
-        avaliacao2.setNome("A2");
-        avaliacao2.setData("29/05/22");
-        avaliacao2.setPeso(3);
-        sistema.cadastraAvalicao(0, 0, avaliacao1);
-        sistema.cadastraAvalicao(0, 0, avaliacao2);
+        Avaliacao avaliacao3 = new Avaliacao();
+        Avaliacao avaliacao4 = new Avaliacao();
+        Avaliacao avaliacao5 = new Avaliacao();
+        avaliacao3.setNome("A1");
+        avaliacao3.setData("22/02/22");
+        avaliacao3.setPeso(2);
+        avaliacao4.setNome("A2");
+        avaliacao4.setData("29/05/22");
+        avaliacao4.setPeso(3);
+        sistema.cadastraAvalicao(0, 0, avaliacao3);
+        sistema.cadastraAvalicao(0, 0, avaliacao4);
+        avaliacao5.setNome("a1Diferencial");
+        avaliacao5.setData("14/08/22");
+        avaliacao5.setPeso(1);
+        sistema.cadastraAvalicao(0, 1, avaliacao5);
 
         // Atribuindo notas às avaliações
         sistema.adicionaNota(0, 0, 0, 0.5);
         sistema.adicionaNota(0, 0, 1, 3);
+        sistema.adicionaNota(0, 1, 0, 7);
         // Calculando a media e decidindo se o aluno está ou não de exame
         System.out.println("Média na disciplina " + sistema.buscarDisciplinas(0).get(0) + ": "
                 + sistema.calculaMediaDaDisciplina(0, 0));
 
         System.out.println(sistema.situacaoDoExame(0, 0));
+        System.out.println("Média na disciplina " + sistema.buscarDisciplinas(0).get(1) + ": "
+                + sistema.calculaMediaDaDisciplina(0, 1));
+
+        System.out.println(sistema.situacaoDoExame(0, 1));
 
         sistema.alunoPdf();
 
