@@ -12,6 +12,8 @@ import com.itextpdf.layout.element.Paragraph;
 
 public class Sistema {
     private List<Aluno> alunos = new LinkedList<Aluno>();
+    // O idAluno = -1 indica que não há aluno logado no momento. Isso será útil para
+    // definir qual menu será mostrado quando for implementada a interfae gráfica
     private int idAluno = -1;
 
     public Sistema() {
@@ -43,6 +45,11 @@ public class Sistema {
         return "Usuário Inválido";
     }
 
+    // Os métodos que recebem ids como parâmetro não verificam a validade do id.
+    // Isso não será um problema, considerando que no programa final, não haverá
+    // input do usuário através do teclado, ele apenas irá interagir com a interface
+    // gŕafica, por isso não conseguirá "Quebrar" o programa escolhendo, por
+    // exemplo, um id de semestre inválido.
     public void cadastraAluno(Aluno aluno) {
 
         this.alunos.add(aluno);
@@ -107,7 +114,7 @@ public class Sistema {
         double soma = 0;
         double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
-            //Verifica se a avaliação tem nota ou não e só a inclui no cálculo se tiver
+            // Verifica se a avaliação tem nota ou não e só a inclui no cálculo se tiver
             if (avaliacoes.get(i).getNota() != -1) {
                 soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
                 pesoTotal += avaliacoes.get(i).getPeso();
@@ -151,6 +158,8 @@ public class Sistema {
         return Objects.equals(alunos, sistema.alunos);
     }
 
+    // O método alunoPdf() apresenta o resumo de todas as disciplinas de todos os
+    // semestres cadastrados, como se fosse um relatório final do aluno.
     public void alunoPdf() {
         Aluno aluno = new Aluno();
         aluno = alunos.get(this.idAluno);
@@ -171,7 +180,7 @@ public class Sistema {
                     doc.add(new Paragraph("-\tDisciplina: "
                             + semestres.get(i).getDisciplinas().get(i2).getNome()));
                     doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina(i, i2)));
-                    doc.add(new Paragraph("-\t\tSituação: "+this.situacaoDoExame(i, i2)));
+                    doc.add(new Paragraph("-\t\tSituação: " + this.situacaoDoExame(i, i2)));
                 }
 
             }
