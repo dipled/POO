@@ -16,6 +16,7 @@ public class Teste {
         aluno.setCfp("908.075.789-67");
         aluno.setIdade(20);
         aluno.setSenha("senha");
+        aluno.setCurso("Ciência da Computação");
         sistema.cadastraAluno(aluno);
 
         // Realizando o login
@@ -67,6 +68,7 @@ public class Teste {
         aluno2.setCfp("040.755.482-62");
         aluno2.setIdade(19);
         aluno2.setSenha("batata");
+        aluno2.setCurso("TADS");
         sistema.cadastraAluno(aluno2);
 
         // Realizando um login inválido

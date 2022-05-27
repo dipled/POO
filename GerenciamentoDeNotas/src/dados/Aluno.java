@@ -8,6 +8,7 @@ public class Aluno {
     private String senha;
     private String nome;
     private int idade;
+    private String curso;
     private List<Semestre> semestres = new LinkedList<Semestre>();
 
     public List<Semestre> getSemestres() {
@@ -17,7 +18,12 @@ public class Aluno {
     public String getSenha() {
         return this.senha;
     }
-
+    public String getCurso(){
+        return this.curso;
+    }
+    public void setCurso(String curso){
+        this.curso = curso;
+    }
     public void setSenha(String senha) {
         this.senha = senha;
     }

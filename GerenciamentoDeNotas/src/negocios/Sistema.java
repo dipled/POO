@@ -35,6 +35,7 @@ public class Sistema {
         this.idAluno = -1;
     }
 
+    // O método login() foi pensado com a interface gráfica em mente, pois retorna
     public String login(Aluno aluno) {
         for (int i = 0; i < this.alunos.size(); i += 1) {
             if (this.alunos.get(i).login(aluno) == true) {
@@ -174,6 +175,7 @@ public class Sistema {
             doc.add(new Paragraph("Nome do Aluno: " + aluno.getNome()));
             doc.add(new Paragraph("-\tCPF: " + aluno.getCpf()));
             doc.add(new Paragraph("-\tIdade: " + aluno.getIdade()));
+            doc.add(new Paragraph("-\tCurso: "+aluno.getCurso()));
             for (int i = 0; i < semestres.size(); i += 1) {
                 doc.add(new Paragraph("Semestre: " + semestres.get(i).getNome()));
                 for (int i2 = 0; i2 < semestres.get(i).getDisciplinas().size(); i2 += 1) {
