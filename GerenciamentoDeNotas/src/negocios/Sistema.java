@@ -107,6 +107,7 @@ public class Sistema {
         double soma = 0;
         double pesoTotal = 0;
         for (int i = 0; i < avaliacoes.size(); i += 1) {
+            //Verifica se a avaliação tem nota ou não e só a inclui no cálculo se tiver
             if (avaliacoes.get(i).getNota() != -1) {
                 soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
                 pesoTotal += avaliacoes.get(i).getPeso();
