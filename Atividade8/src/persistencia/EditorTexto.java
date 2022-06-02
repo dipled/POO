@@ -16,7 +16,7 @@ public class EditorTexto {
             }
             arquivo.close();
         } catch (Exception e) {
-            System.err.println("Arquivo corrompido/erro de escrita");
+            System.err.println("Erro ao manipular o arquivo");
             System.exit(0);
         }
     }

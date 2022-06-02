@@ -22,16 +22,16 @@ public class ArquivoContatoDAO{
         return contato;
     }
     private List<String> listaContatoToString(List<Contato> contatos){
-        List<String> arquivo = new LinkedList<>();
+        List<String> lista = new LinkedList<>();
         for(int i = 0; i < contatos.size(); i += 1){
-            arquivo.add(toCSV(contatos.get(i)));
+            lista.add(toCSV(contatos.get(i)));
         }
-        return arquivo;
+        return lista;
     }
-    private List<Contato>stringToListaContato(List<String> arquivo){
+    private List<Contato>stringToListaContato(List<String> dados){
         List<Contato> contatos = new LinkedList<>();
-        for(int i = 0; i < arquivo.size(); i += 1){
-            contatos.add(fromCSV(arquivo.get(i)));
+        for(int i = 0; i < dados.size(); i += 1){
+            contatos.add(fromCSV(dados.get(i)));
         }
         return contatos;
     }
