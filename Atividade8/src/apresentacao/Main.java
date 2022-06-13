@@ -37,7 +37,6 @@ public class Main {
         }
 
     }
-
     public static void menu() {
         System.out.println("Digite 1 para adicionar um novo contato");
         System.out.println("Digite 2 para remover um contato");
