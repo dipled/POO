@@ -1,7 +1,9 @@
 package apresentacao;
 
 import dados.*;
+import exceptions.AnimalIncorretoException;
 import exceptions.EspacoIndisponivelException;
+import exceptions.TemperaturaIncompativelException;
 import negocio.*;
 
 import java.util.LinkedList;
@@ -118,6 +120,12 @@ public class Apresentacao {
 
         try{
             zoologico.alocarAnimal(zoologico.getAnimais().get(idAnimal), zoologico.getViveiros().get(idViveiro));
+        }
+        catch(TemperaturaIncompativelException t){
+            System.err.println(t.getMessage());
+        }
+        catch(AnimalIncorretoException a){
+            System.err.println(a.getMessage());
         }
         catch(EspacoIndisponivelException e){
             System.err.println(e.getMessage());

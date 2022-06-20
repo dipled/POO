@@ -66,18 +66,9 @@ public class Viveiro {
         return this.calculaEspaco() - this.espacoOcupado();
     }
 
-    public boolean adicionarAnimal(Animal animal) {
-        float animalEspaco = animal.calculaEspacoOcupado();
-        if(!(this instanceof Aquario) && (animal instanceof Peixe))
-        {
-            return false;
-        }
-        if (this.espacoDisponivel() > animalEspaco + 0.70 * animalEspaco) {
+    public void adicionarAnimal(Animal animal) {
             this.animais.add(animal);
-            return true;
-        } else {
-            return false;
-        }
+            
     }
 
     public String toString() {
