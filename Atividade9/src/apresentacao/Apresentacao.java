@@ -50,7 +50,6 @@ public class Apresentacao {
         System.out.println("Digite 5 para mostrar os viveiros cadastrados");
         System.out.println("Digite 0 para sair do programa");
     }
-
     public static void cadastrarAnimal() {
         System.out.println("Digite o nome do animal");
         String nome = in.nextLine();
@@ -78,7 +77,6 @@ public class Apresentacao {
             zoologico.cadastrarAnimal(animal);
         }
     }
-
     public static void cadastrarViveiro() {
         System.out.println("Digite o nome do viveiro");
         String nome = in.nextLine();
