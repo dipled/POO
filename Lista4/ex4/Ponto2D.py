@@ -8,3 +8,6 @@ class Ponto2D:
 
     def getY(self):
         return self.__y
+    
+    def __str__(self):
+        return '({},{})'.format(self.__x, self.__y)

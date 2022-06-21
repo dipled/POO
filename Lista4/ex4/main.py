@@ -17,9 +17,14 @@ try:
     espaco.adicionarReta(R)
     espaco.adicionarReta(Q)
     espaco.adicionarReta(S)
+except ObjetoSobrepostoException as e:
+    print(e)
+try:
     espaco.adicionarPonto(A)
+except ObjetoSobrepostoException as e:
+    print(e)
+try:
     espaco.adicionarPonto(B)
-    espaco.adicionarPonto(C)
 except ObjetoSobrepostoException as e:
     print(e)
 try:
