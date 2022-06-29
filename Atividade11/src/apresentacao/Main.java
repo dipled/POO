@@ -42,6 +42,7 @@ public class Main {
                 case 4:
                     System.out.println("Digite a letra do contato desejado");
                     String input = in.nextLine();
+                    input = input.toUpperCase();
                     exibirContatos(input);
                     break;
                 case 0:
@@ -63,6 +64,7 @@ public class Main {
         Contato contato = new Contato();
         System.out.println("Digite o nome do contato");
         String nome = in.nextLine();
+        nome = nome.toUpperCase();
         contato.setNome(nome);
 
         System.out.println("Digite o telefone do contato");
@@ -86,6 +88,7 @@ public class Main {
         Contato contatoDesejado = new Contato();
         System.out.println("Digite a letra do contato que voce desja remover");
         String letra = in.nextLine();
+        letra = letra.toUpperCase();
         exibirContatos(letra);
         System.out.println("Digite o id do contato que voce deseja remover");
         int id = Integer.parseInt(in.nextLine());

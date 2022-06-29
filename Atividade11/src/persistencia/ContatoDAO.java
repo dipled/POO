@@ -64,7 +64,6 @@ public class ContatoDAO {
             throw new InsertException("Erro ao inserir contato");
         }
     }
-
     public Contato select(int contato) throws SelectException {
         try {
             select.setInt(1, contato);
@@ -96,6 +95,7 @@ public class ContatoDAO {
             update.setString(1, c.getNome());
             update.setInt(2, c.getTelefone());
             update.setInt(3, c.getId());
+            update.executeUpdate();
         } catch (SQLException e) {
             throw new UpdateException("Erro ao atualizar contato");
         }

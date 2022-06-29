@@ -1,10 +1,40 @@
 package dados;
 
 public class Avaliacao {
+    private int id;
     private String nome;
     private double peso;
     private String data;
     private double nota = -1;
+    private int idDisciplina;
+
+    public Avaliacao(){
+
+    }
+
+    public Avaliacao(int id, String nome, double peso, String data, double nota, int idDisciplina) {
+        this.id = id;
+        this.nome = nome;
+        this.peso = peso;
+        this.data = data;
+        this.nota = nota;
+        this.idDisciplina = idDisciplina;
+    }
+
+    public int getIdDisciplina(){
+        return this.idDisciplina;
+    }
+    public void setIdDisciplina(int idDisciplina){
+        this.idDisciplina = idDisciplina;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return this.nome;

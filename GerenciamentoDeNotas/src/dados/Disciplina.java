@@ -1,12 +1,33 @@
 package dados;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public class Disciplina {
+    private int id;
     private String nome;
-    private String professor;
-    private List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
+    private int idSemestre;
+
+    public Disciplina() {
+    }
+
+    public Disciplina(int id, String nome, int idSemestre) {
+        this.id = id;
+        this.nome = nome;
+        this.idSemestre = idSemestre;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdSemestre() {
+        return this.idSemestre;
+    }
+
+    public void setIdSemestre(int idSemestre) {
+        this.idSemestre = idSemestre;
+    }
 
     public String getNome() {
         return this.nome;
@@ -14,19 +35,6 @@ public class Disciplina {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getProfessor() {
-        return this.professor;
-    }
-
-    public void setProfessor(String professor) {
-        this.professor = professor;
-
-    }
-
-    public List<Avaliacao> getAvaliacoes() {
-        return this.avaliacoes;
     }
 
     public String toString() {

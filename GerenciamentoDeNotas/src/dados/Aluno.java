@@ -1,29 +1,48 @@
 package dados;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Aluno {
+    private int id;
     private String cpf;
     private String senha;
     private String nome;
     private int idade;
     private String curso;
-    private List<Semestre> semestres = new LinkedList<Semestre>();
 
-    public List<Semestre> getSemestres() {
-        return this.semestres;
+
+    public Aluno() {
+    }
+
+
+    public Aluno(int id, String cpf, String senha, String nome, int idade, String curso) {
+        this.id = id;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.nome = nome;
+        this.idade = idade;
+        this.curso = curso;
+    }
+
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSenha() {
         return this.senha;
     }
-    public String getCurso(){
+
+    public String getCurso() {
         return this.curso;
     }
-    public void setCurso(String curso){
+
+    public void setCurso(String curso) {
         this.curso = curso;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -64,12 +83,5 @@ public class Aluno {
             return false;
         }
     }
-    //Método verifica se o aluno recebido como parâmetro possui o mesmo cpf e senha que ele(Esta é a condição para fazer login).
-    public boolean login(Aluno aluno) {
-        if (aluno.getCpf().equals(this.cpf) && aluno.getSenha().equals(this.senha)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 }

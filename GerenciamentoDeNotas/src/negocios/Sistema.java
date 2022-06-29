@@ -5,26 +5,29 @@ import java.util.List;
 import java.util.Objects;
 import java.util.LinkedList;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
+
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import persistencia.*;
+import exceptions.*;
 
 public class Sistema {
-    private List<Aluno> alunos = new LinkedList<Aluno>();
+    private AlunoDAO alunoDAO;
+    private SemestreDAO semestreDAO;
+    private DisciplinaDAO disciplinaDAO;
+    private AvaliacaoDAO avaliacaoDAO;
     // O idAluno = -1 indica que não há aluno logado no momento. Isso será útil para
     // definir qual menu será mostrado quando for implementada a interfae gráfica
     private int idAluno = -1;
 
-    public Sistema() {
-    }
-
-    public Sistema(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public List<Aluno> getAlunos() {
-        return this.alunos;
+    public Sistema() throws ClassNotFoundException, SQLException, SelectException {
+        alunoDAO = AlunoDAO.getInstance();
+        semestreDAO = SemestreDAO.getInstance();
+        disciplinaDAO = DisciplinaDAO.getInstance();
+        avaliacaoDAO = AvaliacaoDAO.getInstance();
     }
 
     public int getIdAluno() {
@@ -35,65 +38,65 @@ public class Sistema {
         this.idAluno = -1;
     }
 
-    // O método login() foi pensado com a interface gráfica em mente, pois retorna
-    public String login(Aluno aluno) {
-        for (int i = 0; i < this.alunos.size(); i += 1) {
-            if (this.alunos.get(i).login(aluno) == true) {
-                this.idAluno = i;
-                return "Logado como: " + this.alunos.get(this.idAluno).getNome();
-            }
+    public String login(String cpfIn, String senhaIn) throws SelectException {
+        Aluno aluno = new Aluno();
+        aluno = alunoDAO.login(cpfIn, senhaIn);
+        if (aluno != null) {
+            this.idAluno = aluno.getId();
+            return "Logado como " + aluno.getNome();
+        } else {
+            return "Erro ao fazer login";
         }
-        return "Usuário Inválido";
     }
 
-    // Os métodos que recebem ids como parâmetro não verificam a validade do id.
-    // Isso não será um problema, considerando que no programa final, não haverá
-    // input do usuário através do teclado, ele apenas irá interagir com a interface
-    // gŕafica, por isso não conseguirá "Quebrar" o programa escolhendo, por
-    // exemplo, um id de semestre inválido.
-    public void cadastraAluno(Aluno aluno) {
+    public void cadastraAluno(Aluno aluno) throws InsertException, SelectException {
 
-        this.alunos.add(aluno);
+        alunoDAO.insere(aluno);
 
     }
 
-    public void removeAluno() {
-        this.alunos.remove(this.idAluno);
+    public void removeAluno() throws DeleteException, SelectException {
+        Aluno aluno = new Aluno();
+        aluno = alunoDAO.select(idAluno);
+        alunoDAO.delete(aluno);
     }
-
-    public void cadastraSemestre(Semestre semestre) {
-        this.alunos.get(this.idAluno).getSemestres().add(semestre);
-
+    public void cadastraSemestre(Semestre semestre) throws InsertException, SelectException {
+        semestreDAO.insere(semestre);
     }
-
-    public void removeSemestre(int idSemestre) {
-        this.alunos.get(this.idAluno).getSemestres().remove(idSemestre);
-
+    
+    public void removeSemestre(int idSemestre) throws SelectException, DeleteException {
+        Semestre semestre = new Semestre();
+        semestre = semestreDAO.select(idSemestre);
+        semestreDAO.delete(semestre);
     }
-
-    public void cadastraDisciplina(int idSemestre, Disciplina disciplina) {
-        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().add(disciplina);
+    
+    public void cadastraDisciplina(Disciplina disciplina) throws InsertException, SelectException {
+       disciplinaDAO.insere(disciplina);
     }
-
-    public void removeDisciplina(int idSemestre, int idDisciplina) {
-        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().remove(idDisciplina);
+    
+    public void removeDisciplina(int idDisciplina) throws SelectException, DeleteException {
+        Disciplina disciplina = new Disciplina();
+        disciplina = disciplinaDAO.select(idDisciplina);
+        disciplinaDAO.delete(disciplina);
     }
-
-    public void cadastraAvalicao(int idSemestre, int idDisciplina, Avaliacao avaliacao) {
-        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
-                .add(avaliacao);
+    public void cadastraAvalicao(Avaliacao avaliacao) throws InsertException, SelectException {
+        avaliacaoDAO.insere(avaliacao);
     }
-
-    public void removeAvaliacao(int idSemestre, int idDisciplina, int idAvaliacao) {
-        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
-                .remove(idAvaliacao);
+    
+    public void removeAvaliacao(int idAvaliacao) throws SelectException, DeleteException {
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao = avaliacaoDAO.select(idAvaliacao);
+        avaliacaoDAO.delete(avaliacao);
     }
-
-    public void adicionaNota(int idSemestre, int idDisciplina, int idAvaliacao, double nota) {
-        this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina).getAvaliacoes()
-                .get(idAvaliacao).setNota(nota);
+    
+    public void adicionaNota(int idAvaliacao, double nota) throws SelectException, UpdateException {
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao = avaliacaoDAO.select(idAvaliacao);
+        avaliacao.setNota(nota);
+        avaliacaoDAO.update(avaliacao);
     }
-
+    /*
+    
     public List<Semestre> buscarSemestres() {
         return this.alunos.get(this.idAluno).getSemestres();
     }
@@ -175,7 +178,7 @@ public class Sistema {
             doc.add(new Paragraph("Nome do Aluno: " + aluno.getNome()));
             doc.add(new Paragraph("-\tCPF: " + aluno.getCpf()));
             doc.add(new Paragraph("-\tIdade: " + aluno.getIdade()));
-            doc.add(new Paragraph("-\tCurso: "+aluno.getCurso()));
+            doc.add(new Paragraph("-\tCurso: " + aluno.getCurso()));
             for (int i = 0; i < semestres.size(); i += 1) {
                 doc.add(new Paragraph("Semestre: " + semestres.get(i).getNome()));
                 for (int i2 = 0; i2 < semestres.get(i).getDisciplinas().size(); i2 += 1) {
@@ -192,5 +195,5 @@ public class Sistema {
         }
 
     }
-
+*/
 }
