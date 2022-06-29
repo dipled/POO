@@ -23,7 +23,6 @@ public class Main {
     private static Processo processo16 = new Processo(16);
     private static Processo processo17 = new Processo(17);
     private static Processo processo18 = new Processo(18);
-
     public static void main(String[] args) throws Exception {
         gustavo.setNome("Gustavo");
         pedro.setNome("Pedro");

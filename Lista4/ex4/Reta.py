@@ -23,4 +23,4 @@ class Reta:
         return False
 
     def __str__(self):
-        return '({},{})'.format(self.__a, self.__b)
+        return 'y = {}x + {}'.format(self.__a, self.__b)
