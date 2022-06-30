@@ -101,10 +101,10 @@ public class DisciplinaDAO {
     }
 
 
-    public List<Disciplina> selectSemestre(int disciplina) throws SelectException {
+    public List<Disciplina> selectSemestre(int semestre) throws SelectException {
         List<Disciplina> disciplinas = new LinkedList<>();
         try {
-            selectSemestre.setInt(1, disciplina);
+            selectSemestre.setInt(1, semestre);
             ResultSet rs = selectSemestre.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt(1);

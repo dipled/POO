@@ -2,7 +2,6 @@ package negocios;
 
 import dados.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.LinkedList;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -22,6 +21,9 @@ public class Sistema {
     // O idAluno = -1 indica que não há aluno logado no momento. Isso será útil para
     // definir qual menu será mostrado quando for implementada a interfae gráfica
     private int idAluno = -1;
+    private int idSemestre = -1;
+    private int idDisciplina = -1;
+    private int idAvaliacao = -1;
 
     public Sistema() throws ClassNotFoundException, SQLException, SelectException {
         alunoDAO = AlunoDAO.getInstance();
@@ -30,12 +32,37 @@ public class Sistema {
         avaliacaoDAO = AvaliacaoDAO.getInstance();
     }
 
+
     public int getIdAluno() {
         return this.idAluno;
     }
 
-    public void deslogar() {
-        this.idAluno = -1;
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
+
+    public int getIdSemestre() {
+        return this.idSemestre;
+    }
+
+    public void setIdSemestre(int idSemestre) {
+        this.idSemestre = idSemestre;
+    }
+
+    public int getIdDisciplina() {
+        return this.idDisciplina;
+    }
+
+    public void setIdDisciplina(int idDisciplina) {
+        this.idDisciplina = idDisciplina;
+    }
+
+    public int getIdAvaliacao() {
+        return this.idAvaliacao;
+    }
+
+    public void setIdAvaliacao(int idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 
     public String login(String cpfIn, String senhaIn) throws SelectException {
@@ -61,59 +88,73 @@ public class Sistema {
         alunoDAO.delete(aluno);
     }
     public void cadastraSemestre(Semestre semestre) throws InsertException, SelectException {
+        semestre.setIdAluno(idAluno);
         semestreDAO.insere(semestre);
     }
     
-    public void removeSemestre(int idSemestre) throws SelectException, DeleteException {
+    public void removeSemestre() throws SelectException, DeleteException {
         Semestre semestre = new Semestre();
         semestre = semestreDAO.select(idSemestre);
         semestreDAO.delete(semestre);
     }
     
     public void cadastraDisciplina(Disciplina disciplina) throws InsertException, SelectException {
+        disciplina.setIdSemestre(idSemestre);
        disciplinaDAO.insere(disciplina);
     }
     
-    public void removeDisciplina(int idDisciplina) throws SelectException, DeleteException {
+    public void removeDisciplina() throws SelectException, DeleteException {
         Disciplina disciplina = new Disciplina();
         disciplina = disciplinaDAO.select(idDisciplina);
         disciplinaDAO.delete(disciplina);
     }
     public void cadastraAvalicao(Avaliacao avaliacao) throws InsertException, SelectException {
+        avaliacao.setIdDisciplina(idDisciplina);
         avaliacaoDAO.insere(avaliacao);
     }
     
-    public void removeAvaliacao(int idAvaliacao) throws SelectException, DeleteException {
+    public void removeAvaliacao() throws SelectException, DeleteException {
         Avaliacao avaliacao = new Avaliacao();
         avaliacao = avaliacaoDAO.select(idAvaliacao);
         avaliacaoDAO.delete(avaliacao);
     }
     
-    public void adicionaNota(int idAvaliacao, double nota) throws SelectException, UpdateException {
+    public void adicionaNota(double nota) throws SelectException, UpdateException {
         Avaliacao avaliacao = new Avaliacao();
         avaliacao = avaliacaoDAO.select(idAvaliacao);
         avaliacao.setNota(nota);
         avaliacaoDAO.update(avaliacao);
     }
-    /*
+
+    public void editaAluno(Aluno a) throws UpdateException{
+        alunoDAO.update(a);
+    }
+
+    public void editaSemestre(Semestre s) throws UpdateException{
+        semestreDAO.update(s);
+    }
+    public void editaDisciplina(Disciplina d) throws UpdateException{
+        disciplinaDAO.update(d);
+    }
+    public void editaAvaliacao(Avaliacao a) throws UpdateException{
+        avaliacaoDAO.update(a);
+    }
     
-    public List<Semestre> buscarSemestres() {
-        return this.alunos.get(this.idAluno).getSemestres();
+    public List<Semestre> buscarSemestres() throws SelectException {
+        return semestreDAO.selectAluno(idAluno);
     }
-
-    public List<Disciplina> buscarDisciplinas(int idSemestre) {
-        return this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas();
+    
+    public List<Disciplina> buscarDisciplinas() throws SelectException {
+        return disciplinaDAO.selectSemestre(idSemestre);
     }
-
-    public List<Avaliacao> buscarAvaliacoes(int idSemestre, int idDisciplina) {
-        return this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
-                .getAvaliacoes();
+    
+    public List<Avaliacao> buscarAvaliacoes() throws SelectException {
+        return avaliacaoDAO.selectDisciplina(idDisciplina);
     }
-
-    public double calculaMediaDaDisciplina(int idSemestre, int idDisciplina) {
+    
+    public double calculaMediaDaDisciplina() throws SelectException {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
-        avaliacoes = this.alunos.get(this.idAluno).getSemestres().get(idSemestre).getDisciplinas().get(idDisciplina)
-                .getAvaliacoes();
+        avaliacoes = avaliacaoDAO.selectDisciplina(idDisciplina);
 
         double soma = 0;
         double pesoTotal = 0;
@@ -126,9 +167,9 @@ public class Sistema {
         }
         return soma / pesoTotal;
     }
-
-    public double calculaMediaDoExame(int idSemestre, int idDisciplina) {
-        double mediaFinal = this.calculaMediaDaDisciplina(idSemestre, idDisciplina);
+    
+    public double calculaMediaDoExame() throws SelectException {
+        double mediaFinal = this.calculaMediaDaDisciplina();
         if (mediaFinal >= 7) {
             return -1;
         }
@@ -139,9 +180,9 @@ public class Sistema {
         return exame;
 
     }
-
-    public String situacaoDoExame(int idSemestre, int idDisciplina) {
-        double exame = this.calculaMediaDoExame(idSemestre, idDisciplina);
+    
+    public String situacaoDoExame() throws SelectException {
+        double exame = this.calculaMediaDoExame();
         if (exame == -2) {
             return "Aluno Reprovado";
         }
@@ -149,44 +190,36 @@ public class Sistema {
             return "Aluno Aprovado";
         }
         return "Exame; Média necessária: " + exame;
-
+        
     }
-
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Sistema)) {
-            return false;
-        }
-        Sistema sistema = (Sistema) o;
-        return Objects.equals(alunos, sistema.alunos);
-    }
-
+    
     // O método alunoPdf() apresenta o resumo de todas as disciplinas de todos os
     // semestres cadastrados, como se fosse um relatório final do aluno.
-    public void alunoPdf() {
+    public void alunoPdf() throws SelectException {
         Aluno aluno = new Aluno();
-        aluno = alunos.get(this.idAluno);
+        aluno = alunoDAO.select(idAluno);
         List<Semestre> semestres = new LinkedList<>();
-        semestres = aluno.getSemestres();
+        semestres = semestreDAO.selectAluno(idAluno);
         try {
             String dest = "Notas" + aluno.getCpf() + ".pdf";
             PdfWriter writer = new PdfWriter(dest);
             PdfDocument pdf = new PdfDocument(writer);
             Document doc = new Document(pdf);
-
+            
             doc.add(new Paragraph("Nome do Aluno: " + aluno.getNome()));
             doc.add(new Paragraph("-\tCPF: " + aluno.getCpf()));
             doc.add(new Paragraph("-\tIdade: " + aluno.getIdade()));
             doc.add(new Paragraph("-\tCurso: " + aluno.getCurso()));
             for (int i = 0; i < semestres.size(); i += 1) {
                 doc.add(new Paragraph("Semestre: " + semestres.get(i).getNome()));
-                for (int i2 = 0; i2 < semestres.get(i).getDisciplinas().size(); i2 += 1) {
+                List<Disciplina> disciplinas = new LinkedList<>();
+                disciplinas = disciplinaDAO.selectSemestre(semestres.get(i).getId());
+                for (int i2 = 0; i2 < disciplinas.size(); i2 += 1) {
                     doc.add(new Paragraph("-\tDisciplina: "
-                            + semestres.get(i).getDisciplinas().get(i2).getNome()));
-                    doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina(i, i2)));
-                    doc.add(new Paragraph("-\t\tSituação: " + this.situacaoDoExame(i, i2)));
-                }
+                            + disciplinas.get(i2).getNome()));
+                            doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina()));
+                            doc.add(new Paragraph("-\t\tSituação: " + this.situacaoDoExame()));
+                        }
 
             }
             doc.close();
@@ -195,5 +228,4 @@ public class Sistema {
         }
 
     }
-*/
 }
