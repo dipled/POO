@@ -76,8 +76,8 @@ public class Sistema {
         }
     }
 
-    public void cadastraAluno(Aluno aluno) throws InsertException, SelectException {
-
+    public void cadastraAluno(Aluno aluno) throws InsertException, SelectException, AlunoJaCadastradoException {
+        alunoDAO.selectCpf(aluno.getCpf());
         alunoDAO.insere(aluno);
 
     }
@@ -151,7 +151,6 @@ public class Sistema {
     public List<Avaliacao> buscarAvaliacoes() throws SelectException {
         return avaliacaoDAO.selectDisciplina(idDisciplina);
     }
-    
     public double calculaMediaDaDisciplina() throws SelectException {
         List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
         avaliacoes = avaliacaoDAO.selectDisciplina(idDisciplina);
@@ -167,9 +166,23 @@ public class Sistema {
         }
         return soma / pesoTotal;
     }
-    
+    public double calculaMediaDaDisciplina(int idDisciplina) throws SelectException {
+        List<Avaliacao> avaliacoes = new LinkedList<Avaliacao>();
+        avaliacoes = avaliacaoDAO.selectDisciplina(idDisciplina);
+
+        double soma = 0;
+        double pesoTotal = 0;
+        for (int i = 0; i < avaliacoes.size(); i += 1) {
+            // Verifica se a avaliação tem nota ou não e só a inclui no cálculo se tiver
+            if (avaliacoes.get(i).getNota() != -1) {
+                soma += (avaliacoes.get(i).getNota()) * avaliacoes.get(i).getPeso();
+                pesoTotal += avaliacoes.get(i).getPeso();
+            }
+        }
+        return soma / pesoTotal;
+    }
     public double calculaMediaDoExame() throws SelectException {
-        double mediaFinal = this.calculaMediaDaDisciplina();
+        double mediaFinal = this.calculaMediaDaDisciplina(idDisciplina);
         if (mediaFinal >= 7) {
             return -1;
         }
@@ -181,8 +194,32 @@ public class Sistema {
 
     }
     
+    public double calculaMediaDoExame(int idDisciplina) throws SelectException {
+        double mediaFinal = this.calculaMediaDaDisciplina(idDisciplina);
+        if (mediaFinal >= 7) {
+            return -1;
+        }
+        if (mediaFinal < 1.7) {
+            return -2;
+        }
+        double exame = -1.5 * mediaFinal + 12.5;
+        return exame;
+
+    }
     public String situacaoDoExame() throws SelectException {
-        double exame = this.calculaMediaDoExame();
+        double exame = this.calculaMediaDoExame(idDisciplina);
+        if (exame == -2) {
+            return "Aluno Reprovado";
+        }
+        if (exame == -1) {
+            return "Aluno Aprovado";
+        }
+        return "Exame; Média necessária: " + exame;
+        
+    }
+    
+    public String situacaoDoExame(int idDisciplina) throws SelectException {
+        double exame = this.calculaMediaDoExame(idDisciplina);
         if (exame == -2) {
             return "Aluno Reprovado";
         }
@@ -217,10 +254,9 @@ public class Sistema {
                 for (int i2 = 0; i2 < disciplinas.size(); i2 += 1) {
                     doc.add(new Paragraph("-\tDisciplina: "
                             + disciplinas.get(i2).getNome()));
-                            doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina()));
-                            doc.add(new Paragraph("-\t\tSituação: " + this.situacaoDoExame()));
+                            doc.add(new Paragraph("-\t\tMédia Final: " + this.calculaMediaDaDisciplina(disciplinas.get(i2).getId())));
+                            doc.add(new Paragraph("-\t\tSituação: " + this.situacaoDoExame(disciplinas.get(i2).getId())));
                         }
-
             }
             doc.close();
         } catch (FileNotFoundException e) {
