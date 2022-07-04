@@ -20,7 +20,7 @@ public class AlunoDAO {
     private PreparedStatement delete;
     private PreparedStatement update;
     private PreparedStatement login;
-    private PreparedStatement selectCpf;
+    private PreparedStatement validaCpf;
 
     private AlunoDAO() throws ClassNotFoundException, SQLException, SelectException {
         Connection con = Conexao.getConnection();
@@ -31,7 +31,7 @@ public class AlunoDAO {
         update = con
                 .prepareStatement("update aluno set cpf = ?, senha = ?, nome = ?, idade = ?, curso = ? where id = ?");
         login = con.prepareStatement("select * from aluno where cpf = ? and senha = ?");
-        selectCpf = con.prepareStatement("select * from aluno where cpf = ?");
+        validaCpf = con.prepareStatement("select * from aluno where cpf = ?");
     }
     private int selectNewId() throws SelectException {
         try {
@@ -107,10 +107,10 @@ public class AlunoDAO {
         }
         return null;
     }
-    public void selectCpf(String cpf) throws AlunoJaCadastradoException{
+    public void validaCpf(String cpf) throws AlunoJaCadastradoException{
         try{
-            selectCpf.setString(1, cpf);
-            ResultSet rs = selectCpf.executeQuery();
+            validaCpf.setString(1, cpf);
+            ResultSet rs = validaCpf.executeQuery();
             if(rs.next()){
                 throw new AlunoJaCadastradoException("CPF já cadastrado");
             }

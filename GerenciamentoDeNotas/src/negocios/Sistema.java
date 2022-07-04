@@ -77,7 +77,7 @@ public class Sistema {
     }
 
     public void cadastraAluno(Aluno aluno) throws InsertException, SelectException, AlunoJaCadastradoException {
-        alunoDAO.selectCpf(aluno.getCpf());
+        alunoDAO.validaCpf(aluno.getCpf());
         alunoDAO.insere(aluno);
 
     }
